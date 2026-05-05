@@ -4,6 +4,31 @@ local M = {}
 ---@type table<string, boolean>
 local notified_missing_parser = {}
 
+---@type table<string, boolean>?
+local installable_parsers
+
+---Return whether nvim-treesitter can install a parser for a language.
+---@param lang string Treesitter language name.
+---@return boolean installable `true` when `:TSInstall {lang}` is supported.
+local function can_install_parser(lang)
+  if not installable_parsers then
+    ---@type boolean, table<string, { tier?: integer }>
+    local ok, parsers = pcall(require, 'nvim-treesitter.parsers')
+    if not ok then
+      return false
+    end
+
+    installable_parsers = {}
+    for parser_lang, parser in pairs(parsers) do
+      if parser.tier ~= 4 then
+        installable_parsers[parser_lang] = true
+      end
+    end
+  end
+
+  return installable_parsers[lang] == true
+end
+
 ---Build keymap options for Treesitter actions.
 ---@param desc string Action label shown in keymap pickers.
 ---@return vim.keymap.set.Opts
@@ -37,7 +62,7 @@ local function start(buf)
   end
 
   local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
-  if not lang or notified_missing_parser[lang] then
+  if not lang or notified_missing_parser[lang] or not can_install_parser(lang) then
     return
   end
 
