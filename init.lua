@@ -1,7 +1,7 @@
 ---Hvim entrypoint: editor options, core keymaps, diagnostics, terminal helpers,
 ---and plugin bootstrap.
 
-if vim.env.SSH_TTY or vim.env.NODE_PTY then
+if vim.env.SSH_TTY or vim.env.COMMUT then
   local copy      = require('vim.ui.clipboard.osc52').copy
   local paste     = require('vim.ui.clipboard.osc52').paste
   vim.g.clipboard = {
