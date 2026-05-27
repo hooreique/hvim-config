@@ -14,15 +14,13 @@ function M.setup()
     },
     cmdline = {
       enabled = true,
+      sources = { 'buffer', 'cmdline' },
       completion = {
         ghost_text = { enabled = true },
         menu = { auto_show = true },
       },
     },
     signature = { enabled = true },
-    sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline' },
-    },
   }
 end
 
