@@ -112,6 +112,7 @@ function M.setup()
   ---@type { [1]: string, [2]: string }[]
   local servers = {
     { 'ruff',        'ruff' },
+    { 'pyrefly',     'pyrefly' },
 
     { 'nil_ls',      'nil' },
 
