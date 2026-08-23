@@ -123,6 +123,13 @@ function M.setup()
     vim.lsp.enable 'basedpyright'
   end
 
+  if vim.fn.executable 'ruff' == 1 then
+    vim.lsp.config('ruff', {
+      capabilities = { general = { positionEncodings = { 'utf-16' } } },
+    })
+    vim.lsp.enable 'ruff'
+  end
+
   if vim.fn.executable 'lemminx' == 1 then
     vim.lsp.config('lemminx', { filetypes = { 'xml', 'xsd', 'xslt', 'svg' } })
     vim.lsp.enable 'lemminx'
@@ -130,7 +137,6 @@ function M.setup()
 
   ---@type { [1]: string, [2]: string }[]
   local servers = {
-    { 'ruff',        'ruff' },
     { 'pyrefly',     'pyrefly' },
 
     { 'nil_ls',      'nil' },
