@@ -72,7 +72,6 @@ function M.setup()
   local ts_ls_executable = vim.fn.executable 'typescript-language-server' == 1
 
   if vue_ls_executable then
-    vim.lsp.config('vue_ls', {})
     vim.lsp.enable 'vue_ls'
   end
 
@@ -98,8 +97,6 @@ function M.setup()
           'vue',
         },
       })
-    else
-      vim.lsp.config('ts_ls', {})
     end
 
     vim.lsp.enable 'ts_ls'
@@ -107,7 +104,6 @@ function M.setup()
 
   if vim.fn.executable 'deno' == 1 and
       vim.fn.executable 'typescript-language-server' == 0 then
-    vim.lsp.config('denols', {})
     vim.lsp.enable 'denols'
   end
 
@@ -115,7 +111,6 @@ function M.setup()
   if vim.fn.executable 'svelteserver' == 1 then
     if vim.fn.executable 'typescript-language-server' == 1 then
       vim.lsp.enable 'ts_ls'
-      vim.lsp.config('svelte', {})
       vim.lsp.enable 'svelte'
     else
       vim.notify 'svelteserver is executable but typescript-language-server is not.'
@@ -161,7 +156,6 @@ function M.setup()
 
   for _, pair in ipairs(servers) do
     if vim.fn.executable(pair[2]) == 1 then
-      vim.lsp.config(pair[1], pair[3] or {})
       vim.lsp.enable(pair[1])
     end
   end
