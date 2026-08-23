@@ -68,16 +68,40 @@ end
 function M.setup()
   register_filetypes()
 
-  if vim.fn.executable 'vue-language-server' == 1 then
-    vim.lsp.config('vue_ls', {
-      init_options = { vue = { hybridMode = false } },
-      filetypes = {
-        'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue',
-      },
-    })
+  local vue_ls_executable = vim.fn.executable 'vue-language-server' == 1
+  local ts_ls_executable = vim.fn.executable 'typescript-language-server' == 1
+
+  if vue_ls_executable then
+    vim.lsp.config('vue_ls', {})
     vim.lsp.enable 'vue_ls'
-  elseif vim.fn.executable 'typescript-language-server' == 1 then
-    vim.lsp.config('ts_ls', {})
+  end
+
+  if ts_ls_executable then
+    if vue_ls_executable then
+      local vue_ls_path = vim.fn.exepath 'vue-language-server'
+      local vue_ls_root = vim.fs.dirname(vim.fs.dirname(vue_ls_path))
+
+      vim.lsp.config('ts_ls', {
+        init_options = {
+          plugins = {
+            {
+              name = '@vue/typescript-plugin',
+              location = vue_ls_root ..
+                  '/lib/language-tools/packages/language-server',
+              languages = { 'vue' },
+            },
+          },
+        },
+        filetypes = {
+          'javascript', 'javascriptreact',
+          'typescript', 'typescriptreact',
+          'vue',
+        },
+      })
+    else
+      vim.lsp.config('ts_ls', {})
+    end
+
     vim.lsp.enable 'ts_ls'
   end
 
