@@ -117,12 +117,6 @@ function M.setup()
     end
   end
 
-  -- pkgs.basedpyright
-  if vim.fn.executable 'basedpyright-langserver' == 1 then
-    vim.lsp.config('basedpyright', { offset_encoding = 'utf-8' })
-    vim.lsp.enable 'basedpyright'
-  end
-
   if vim.fn.executable 'ruff' == 1 then
     vim.lsp.config('ruff', {
       capabilities = { general = { positionEncodings = { 'utf-16' } } },
