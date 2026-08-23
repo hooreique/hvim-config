@@ -131,27 +131,29 @@ function M.setup()
 
   ---@type { [1]: string, [2]: string }[]
   local servers = {
-    { 'pyrefly',     'pyrefly' },
+    { 'pyrefly',       'pyrefly' },
 
-    { 'nil_ls',      'nil' },
+    { 'rust_analyzer', 'rust-analyzer' },
 
-    { 'lua_ls',      'lua-language-server' },
+    { 'nil_ls',        'nil' },
 
-    { 'zk',          'zk' },
+    { 'lua_ls',        'lua-language-server' },
+
+    { 'zk',            'zk' },
 
     -- pkgs.vscode-langservers-extracted
-    { 'html',        'vscode-html-language-server' },
-    { 'cssls',       'vscode-css-language-server' },
-    { 'jsonls',      'vscode-json-language-server' },
+    { 'html',          'vscode-html-language-server' },
+    { 'cssls',         'vscode-css-language-server' },
+    { 'jsonls',        'vscode-json-language-server' },
 
-    { 'yamlls',      'yaml-language-server' },
+    { 'yamlls',        'yaml-language-server' },
 
     -- pkgs.dockerfile-language-server-nodejs
-    { 'dockerls',    'docker-langserver' },
+    { 'dockerls',      'docker-langserver' },
 
-    { 'tailwindcss', 'tailwindcss-language-server' },
+    { 'tailwindcss',   'tailwindcss-language-server' },
 
-    { 'unocss',      'unocss-language-server' },
+    { 'unocss',        'unocss-language-server' },
   }
 
   for _, pair in ipairs(servers) do
