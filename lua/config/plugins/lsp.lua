@@ -131,6 +131,8 @@ function M.setup()
 
   ---@type { [1]: string, [2]: string }[]
   local servers = {
+    { 'kotlin_lsp',    'intellij-server' },
+
     { 'pyrefly',       'pyrefly' },
 
     { 'rust_analyzer', 'rust-analyzer' },
